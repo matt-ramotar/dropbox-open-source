@@ -25,7 +25,7 @@ async function fetch(){
             else page++
         }
  
-        fs.writeFile('./projects.json', json, err => {
+        fs.writeFile('./projects.json', JSON.stringify(projects), err => {
             console.log(err)
         })
     } catch (e) {
