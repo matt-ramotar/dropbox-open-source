@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { media } from 'utils/media';
@@ -28,7 +29,8 @@ export default function TwitterTimeline() {
 function TwitterTimelineDark(props: { display: boolean }) {
     return (
         <div style={{ display: props.display ? 'flex' : 'none' }}>
-            <a className="twitter-timeline" data-width="500" data-theme='dark' href="https://twitter.com/DropboxOSS?ref_src=twsrc%5Etfw">Tweets by DropboxOSS</a><script src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+            <a className="twitter-timeline" data-width="500" data-theme='dark' href="https://twitter.com/DropboxOSS?ref_src=twsrc%5Etfw">Tweets by DropboxOSS</a>
+            <Script src="https://platform.twitter.com/widgets.js"></Script>
         </div>
     )
 }
@@ -37,7 +39,8 @@ function TwitterTimelineDark(props: { display: boolean }) {
 function TwitterTimelineLight(props: { display: boolean }) {
     return (
         <div style={{ display: props.display ? 'flex' : 'none' }}>
-            <a className="twitter-timeline" data-width="500" data-theme='light' href="https://twitter.com/DropboxOSS?ref_src=twsrc%5Etfw">Tweets by DropboxOSS</a><script src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
+            <a className="twitter-timeline" data-width="500" data-theme='light' href="https://twitter.com/DropboxOSS?ref_src=twsrc%5Etfw">Tweets by DropboxOSS</a>
+            <Script src="https://platform.twitter.com/widgets.js"></Script>
         </div>
     )
 }
