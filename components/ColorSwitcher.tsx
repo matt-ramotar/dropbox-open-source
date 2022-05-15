@@ -4,7 +4,7 @@ import { useColorSwitcher } from 'nextjs-color-mode';
 import { ThemeContext } from 'pages/_app';
 import { useContext, useEffect } from 'react';
 
-export default function ColorSwitcher() {
+export default function ColorSwitcher(): JSX.Element {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const { toggleTheme, colorMode } = useColorSwitcher();
