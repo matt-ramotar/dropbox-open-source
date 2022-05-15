@@ -23,7 +23,7 @@ export default function ImageCard({ title, description, imageUrl, tags, tagToCol
       {tags ? (
         <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
           {tags.map(tag => (
-            <ColoredTag tag={tag} color={tagToColor[tag]} />
+            <ColoredTag key={tag} tag={tag} color={tagToColor[tag]} />
           ))}
         </div>
       ) : <span></span>}

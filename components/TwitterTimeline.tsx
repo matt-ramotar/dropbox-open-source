@@ -28,7 +28,7 @@ export default function TwitterTimeline() {
 function TwitterTimelineDark(props: { display: boolean }) {
     return (
         <div style={{ display: props.display ? 'flex' : 'none' }}>
-            <a class="twitter-timeline" data-width="500" data-theme='dark' href="https://twitter.com/DropboxOSS?ref_src=twsrc%5Etfw">Tweets by DropboxOSS</a><script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <a className="twitter-timeline" data-width="500" data-theme='dark' href="https://twitter.com/DropboxOSS?ref_src=twsrc%5Etfw">Tweets by DropboxOSS</a><script src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
         </div>
     )
 }
@@ -37,7 +37,7 @@ function TwitterTimelineDark(props: { display: boolean }) {
 function TwitterTimelineLight(props: { display: boolean }) {
     return (
         <div style={{ display: props.display ? 'flex' : 'none' }}>
-            <a class="twitter-timeline" data-width="500" data-theme='light' href="https://twitter.com/DropboxOSS?ref_src=twsrc%5Etfw">Tweets by DropboxOSS</a><script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <a className="twitter-timeline" data-width="500" data-theme='light' href="https://twitter.com/DropboxOSS?ref_src=twsrc%5Etfw">Tweets by DropboxOSS</a><script src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
         </div>
     )
 }
