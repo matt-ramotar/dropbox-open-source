@@ -24,16 +24,16 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
   font-size: 5rem;
-  margin-top: 5rem;
 `;
 
 const Description = styled.div`
   font-size: 3rem;
   opacity: 0.8;
-  margin-top: 2.5rem;
 `;
 
 const ImageContainer = styled.div`
-  width: 25rem;
+  width: 40rem;
   margin: auto;
+  display: flex;
+  justify-content: center;
 `;
