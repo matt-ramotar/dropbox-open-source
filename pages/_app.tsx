@@ -6,6 +6,7 @@ import Navbar from 'components/Navbar';
 import WaveCta from 'components/WaveCta';
 import { AppProps } from 'next/dist/shared/lib/router/router';
 import Head from 'next/head';
+import Script from 'next/script';
 import { ColorModeScript } from 'nextjs-color-mode';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import 'swiper/css';
@@ -50,8 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-
-        <script src="https://kit.fontawesome.com/148aebd870.js"></script>
+        <Script src="https://kit.fontawesome.com/148aebd870.js"></Script>
       </Head>
       <ColorModeScript />
       <GlobalStyle />
