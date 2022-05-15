@@ -1,5 +1,5 @@
-import * as core from '@actions/core';
 import axios from 'axios';
+import fs from 'fs';
 
 const REPOS_URL = "https://api.github.com/orgs/dropbox/repos"
 
@@ -25,7 +25,9 @@ async function fetch(){
             else page++
         }
  
-        core.setOutput('projects', JSON.stringify(projects))
+        fs.writeFile('./projects.json', json, err => {
+            console.log(err)
+        })
     } catch (e) {
         console.log(e)
         process.exit(-1)
