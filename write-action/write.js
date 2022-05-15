@@ -6,7 +6,7 @@ function write(){
     const json = JSON.stringify(JSON.parse(projects))
     
     fs.writeFile('./projects.json', json, err => {
-        console.w(err)
+        console.log(err)
     })
 }
 
