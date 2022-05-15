@@ -1,6 +1,7 @@
 {
   "name": "dropbox-open-source",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "yarn next dev",
     "build": "yarn next build",
