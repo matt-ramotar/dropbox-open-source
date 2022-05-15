@@ -40,6 +40,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <Script src="https://kit.fontawesome.com/148aebd870.js"></Script>
+
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -51,7 +53,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        <Script src="https://kit.fontawesome.com/148aebd870.js"></Script>
       </Head>
       <ColorModeScript />
       <GlobalStyle />
