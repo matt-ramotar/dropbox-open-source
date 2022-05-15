@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@accessible/drawer": "^3.0.2",
+    "@actions/core": "^1.8.2",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-brands-svg-icons": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
