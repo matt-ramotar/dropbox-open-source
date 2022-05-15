@@ -1,0 +1,51 @@
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 */12 * * *'
+
+permissions: write-all
+
+jobs:
+  projects:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: env
+    name: Projects
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Fetch projects
+      id: fetch-projects
+      uses: matt-ramotar/dropbox-open-source/fetch-action@main
+
+    - name: Write projects
+      env:
+        PROJECTS: ${{ steps.fetch-projects.outputs.projects }}
+      uses: matt-ramotar/dropbox-open-source/write-action@main
+
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Auto log
+        branch: main
+        commit_options: '--no-verify'
+  
+        commit_user_name: Dropbox Open Source Bot
+        commit_user_email: mramotar@dropbox.com
+        push_options: '--force'
+        skip_dirty_check: true    
+        skip_fetch: true    

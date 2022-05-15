@@ -1,0 +1,7 @@
+name: 'Fetch projects'
+outputs:
+  projects:
+    description: Array of repositories
+runs:
+  using: 'node16'
+  main: 'fetch.js'

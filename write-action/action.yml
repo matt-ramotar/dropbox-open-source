@@ -1,0 +1,4 @@
+name: 'Write projects'
+runs:
+  using: 'node16'
+  main: 'write.js'
