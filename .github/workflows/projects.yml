@@ -35,7 +35,6 @@ jobs:
 
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
-        file_pattern: ./projects.json
         commit_message: Auto update 
         branch: main
         commit_options: '--no-verify'
