@@ -29,13 +29,9 @@ jobs:
     - name: Install dependencies
       run: yarn install
 
-    - run: yarn add @octokit/action
-
     - name: Fetch projects
       id: fetch-projects
       uses: matt-ramotar/dropbox-open-source/fetch-action@main
-      with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
