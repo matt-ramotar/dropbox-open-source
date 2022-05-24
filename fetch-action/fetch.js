@@ -18,15 +18,16 @@ async function fetch(){
 
 async function fetchRepositories(octokit, page) {
 
-    const { data } = await octokit.request(`GET ${REPOS_URL}`, {
+    const response = await octokit.request(`GET ${REPOS_URL}`, {
         params: {
             sort: "updated",
             per_page: 100,
             page: page
         }});
 
+    console.log(response)
 
-    return data
+    return response.data
 }
 
 async function handleProjects(octokit) {
@@ -84,9 +85,10 @@ async function handleLanguages(octokit, projects) {
 }
 
 async function fetchLanguages(octokit, repository) {
-    const { data } = await octokit.request(`GET ${repository.languages_url.replace("https://api.github.com", '')}`);
+    const response = await octokit.request(`GET ${repository.languages_url.replace("https://api.github.com", '')}`);
+    console.log(response)
 
-    return data
+    return response.data
 }
 
 fetch()
