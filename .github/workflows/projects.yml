@@ -29,6 +29,8 @@ jobs:
     - name: Install dependencies
       run: yarn install
 
+    - run: yarn add @octokit/action
+
     - name: Fetch projects
       id: fetch-projects
       uses: matt-ramotar/dropbox-open-source/fetch-action@main

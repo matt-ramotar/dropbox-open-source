@@ -1,10 +1,12 @@
-import axios from 'axios';
+import { Octokit } from '@octokit/action';
 import fs from 'fs';
 
 const REPOS_URL = "https://api.github.com/orgs/dropbox/repos"
 
 async function fetch(){
     try {
+        const octokit = new Octokit()
+
         const projects = []
         const idToLanguages = {}
 
@@ -12,7 +14,7 @@ async function fetch(){
         let shouldFetch = true
 
         while (shouldFetch) {
-            const repositories = await fetchRepositories(page)
+            const repositories = await fetchRepositories(octokit, page)
 
             projects.push(...repositories)
 
@@ -55,21 +57,23 @@ async function fetch(){
     }
 };
 
-async function fetchRepositories(page) {
-    const response = await axios.get(REPOS_URL, {
+async function fetchRepositories(octokit, page) {
+
+    const { data } = await octokit.request(`GET ${REPOS_URL}`, {
         params: {
             sort: "updated",
             per_page: 100,
             page: page
-        }
-    })
+        }});
 
-    return response.data
+
+    return data
 }
 
-async function fetchLanguages(repository) {
-    const response = await axios.get(repository.languages_url)
-    return response.data
+async function fetchLanguages(octokit, repository) {
+    const { data } = await octokit.request(`GET ${repository.languages_url}`);
+
+    return data
 }
 
 fetch()
