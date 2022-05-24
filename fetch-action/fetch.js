@@ -33,7 +33,7 @@ async function handleProjects(octokit) {
 
         projects.push(...response.data)
 
-        if (repositories.length != 100) shouldFetch = false
+        if (response.data.length != 100) shouldFetch = false
         else page++
     }
 
