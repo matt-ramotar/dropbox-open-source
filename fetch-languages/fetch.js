@@ -1,13 +1,16 @@
-import axios from 'axios';
+import { Octokit } from '@octokit/action';
 import fs from 'fs';
 import projects from '../projects.js';
 
 async function fetch(){
+    const octokit = new Octokit()
+
     try {
         const idToLanguages = {}
 
         for (const project of projects) {
-            const response = await axios.get(project.languages_url)
+            console.log("Fetching languages for project ", project.name)
+            const response = await octokit.get(`GET ${project.languages_url.replace('https://api.github.com')}`)
             idToLanguages[project.id] = response.data
         }
  
