@@ -1,6 +1,6 @@
 import axios from 'axios';
 import fs from 'fs';
-import projects from '../projects';
+import projects from '../projects.js';
 
 async function fetch(){
     try {
