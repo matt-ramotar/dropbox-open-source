@@ -1,10 +1,13 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Repository } from 'types';
+import idToLanguages from '../idToLanguages';
 
 interface TagToColor {
   [tag: string]: string
+}
+
+interface LanguageToColor {
+  [language: string]: string
 }
 
 interface ProjectCardProps {
@@ -16,33 +19,32 @@ interface Languages {
   [language: string]: number
 }
 
-export default function ProjectCard({ tagToColor, repository: { name, description, topics, languages_url, stargazers_count, forks_count, watchers_count } }: ProjectCardProps) {
-  const [languages, setLanguages] = useState<Languages>()
+interface IdToLanguages {
+  [id: string]: Languages
+}
 
-  useEffect(() => {
-    async function fetchLanguages() {
-
-      if (languages_url) {
-
-        const response = await axios.get(languages_url)
-        console.log(response)
-        setLanguages(response.data)
-        console.log(response)
-      }
-    }
-
-    fetchLanguages()
-  }, [])
+export default function ProjectCard({ tagToColor, repository: { id, name, description, topics, languages_url, stargazers_count, forks_count, watchers_count } }: ProjectCardProps) {
+  const idString = id.toString()
+  const languages: Languages = (idToLanguages as IdToLanguages)[idString]
 
   return (
     <Card>
-      <p>{JSON.stringify(languages)}</p>
       <Title>{name}</Title>
       <Description>{description}</Description>
 
       {topics ? (
         <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
-          {topics.map(topic => (
+          {Object.keys(languages).map(language => (
+            <LanguageTag key={language}>
+              {language}
+            </LanguageTag>
+          ))}
+        </div>
+      ) : <span></span>}
+
+      {topics ? (
+        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {topics.filter(topic => !languages[topic]).map(topic => (
             <ColoredTag key={topic} tag={topic} color={tagToColor[topic]} />
           ))}
         </div>
@@ -87,9 +89,20 @@ const ColoredTag = (props: { tag: string, color: string }) => (
     margin: '4px',
   }}>
     <span style={{
-      fontWeight: 'bold'
+      fontWeight: 'bold',
+      fontSize: '1.25rem',
     }}>
       {props.tag}
     </span>
   </div>
 )
+
+const LanguageTag = styled.div`
+  background: rgb(var(--background));
+  color: rgb(var(--secondaryText));
+  border-radius: 8px;
+  padding: 4px;
+  margin: 4px;
+  font-weight: bold;
+  font-size: 1.25rem;
+`
