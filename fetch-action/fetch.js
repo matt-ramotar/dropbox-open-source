@@ -6,33 +6,70 @@ const REPOS_URL = "https://api.github.com/orgs/dropbox/repos"
 async function fetch(){
     try {
         const projects = []
+        const idToLanguages = {}
 
         let page = 1
         let shouldFetch = true
 
         while (shouldFetch) {
-            const response = await axios.get(REPOS_URL, {
-                params: {
-                    sort: "updated",
-                    per_page: 100,
-                    page: page
-                }
-            })
+            const repositories = await fetchRepositories(page)
 
-            projects.push(...response.data)
+            projects.push(...repositories)
 
-            if (response.data.length != 100) shouldFetch = false
+            if (repositories.length != 100) shouldFetch = false
             else page++
         }
  
         fs.writeFile('./projects.json', JSON.stringify(projects), err => {
             console.log(err)
         })
+
+        const projectsStr = `
+        const projects = [${projects.map(project => JSON.stringify(project))}];
+        export default projects;
+        `
+        
+        fs.writeFile('./projects.js', projectsStr, err => {
+            console.log(err)
+        })
+    
+        for (const project of projects) {
+            const languages = await fetchLanguages(project)
+            if (languages) {
+                idToLanguages[project.id] = languages
+            } 
+        }
+
+        const idToLanguagesStr = `
+        const idToLanguages = ${JSON.stringify(idToLanguages)};
+        export default idToLanguages;
+        `
+
+        fs.writeFile('./idToLanguages.js', idToLanguagesStr, err => {
+            console.log(err)
+        })
+
     } catch (e) {
         console.log(e)
         process.exit(-1)
     }
 };
 
-fetch()
+async function fetchRepositories(page) {
+    const response = await axios.get(REPOS_URL, {
+        params: {
+            sort: "updated",
+            per_page: 100,
+            page: page
+        }
+    })
 
+    return response.data
+}
+
+async function fetchLanguages(repository) {
+    const response = await axios.get(repository.languages_url)
+    return response.data
+}
+
+fetch()
