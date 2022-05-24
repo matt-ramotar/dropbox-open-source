@@ -1,7 +1,7 @@
 import { Octokit } from '@octokit/action';
 import fs from 'fs';
 
-const REPOS_URL = "https://api.github.com/orgs/dropbox/repos"
+const REPOS_URL = "/orgs/dropbox/repos"
 
 async function fetch(){
     try {
@@ -84,7 +84,7 @@ async function handleLanguages(octokit, projects) {
 }
 
 async function fetchLanguages(octokit, repository) {
-    const { data } = await octokit.request(`GET ${repository.languages_url}`);
+    const { data } = await octokit.request(`GET ${repository.languages_url.replace("https://api.github.com", '')}`);
 
     return data
 }
