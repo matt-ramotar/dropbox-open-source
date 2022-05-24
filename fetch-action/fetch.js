@@ -61,9 +61,6 @@ async function fetchRepositories(page) {
             sort: "updated",
             per_page: 100,
             page: page
-        },
-        headers: {
-            authorization: `Bearer ${process.env.GITHUB_TOKEN}`
         }
     })
 
@@ -71,11 +68,7 @@ async function fetchRepositories(page) {
 }
 
 async function fetchLanguages(repository) {
-    const response = await axios.get(repository.languages_url, {
-        headers: {
-            authorization: `Bearer ${process.env.GITHUB_TOKEN}`
-        }
-    })
+    const response = await axios.get(repository.languages_url)
     return response.data
 }
 
