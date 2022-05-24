@@ -1,0 +1,4 @@
+name: 'Fetch languages'
+runs:
+  using: 'node16'
+  main: 'fetch.js'

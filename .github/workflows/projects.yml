@@ -43,4 +43,20 @@ jobs:
         commit_user_email: mramotar@dropbox.com
         push_options: '--force'
         skip_dirty_check: true    
-        skip_fetch: true    
+        skip_fetch: true
+
+    - name: Fetch languages
+      id: fetch-languages
+      uses: matt-ramotar/dropbox-open-source/fetch-languages@main
+
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Auto update 
+        branch: main
+        commit_options: '--no-verify'
+  
+        commit_user_name: Dropbox Open Source Bot
+        commit_user_email: mramotar@dropbox.com
+        push_options: '--force'
+        skip_dirty_check: true    
+        skip_fetch: true
