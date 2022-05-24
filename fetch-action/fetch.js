@@ -16,17 +16,6 @@ async function fetch(){
     }
 };
 
-async function fetchRepositories(octokit, page) {
-    const response = await octokit.request(`GET ${REPOS_URL}`, {
-        params: JSON.stringify({
-            sort: "updated",
-            per_page: 100,
-            page: page
-        })});
-
-    return response.data
-}
-
 async function handleProjects(octokit) {
     const projects = []
 
@@ -34,16 +23,22 @@ async function handleProjects(octokit) {
     let shouldFetch = true
 
     while (shouldFetch) {
-        const repositories = await fetchRepositories(octokit, page)
+        console.log("Requesting page ", page)
+        const response = await octokit.request(`GET ${REPOS_URL}`, {
+            params: JSON.stringify({
+                sort: "updated",
+                per_page: 100,
+                page: page
+            })});
 
-        projects.push(...repositories)
+        projects.push(...response.data)
 
         if (repositories.length != 100) shouldFetch = false
         else page++
     }
 
     fs.writeFile('./projects.json', JSON.stringify(projects), err => {
-        console.log(err)
+        console.log("Error writing projects JSON", err)
     })
 
     const projectsStr = `
@@ -52,7 +47,7 @@ async function handleProjects(octokit) {
     `
     
     fs.writeFile('./projects.js', projectsStr, err => {
-        console.log(err)
+        console.log("Error writing projects JS", err)
     })
 
     return projects
@@ -64,9 +59,9 @@ async function handleLanguages(octokit, projects) {
 
        
     for (const project of projects) {
-        const languages = await fetchLanguages(octokit, project)
-        if (languages) {
-            idToLanguages[project.id] = languages
+        const response = await octokit.request(`GET ${repository.languages_url.replace("https://api.github.com", '')}`);
+        if (response.data) {
+            idToLanguages[project.id] = response.data
         } 
     }
 
@@ -76,14 +71,13 @@ async function handleLanguages(octokit, projects) {
     `
 
     fs.writeFile('./idToLanguages.js', idToLanguagesStr, err => {
-        console.log(err)
+        console.log("Error writing idToLanguages", err)
     })
     
 }
 
 async function fetchLanguages(octokit, repository) {
-    const response = await octokit.request(`GET ${repository.languages_url.replace("https://api.github.com", '')}`);
-    return response.data
+
 }
 
 fetch()
