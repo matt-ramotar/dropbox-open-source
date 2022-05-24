@@ -59,7 +59,7 @@ async function handleLanguages(octokit, projects) {
 
        
     for (const project of projects) {
-        const response = await octokit.request(`GET ${repository.languages_url.replace("https://api.github.com", '')}`);
+        const response = await octokit.request(`GET ${project.languages_url.replace("https://api.github.com", '')}`);
         if (response.data) {
             idToLanguages[project.id] = response.data
         } 
@@ -74,10 +74,6 @@ async function handleLanguages(octokit, projects) {
         console.log("Error writing idToLanguages", err)
     })
     
-}
-
-async function fetchLanguages(octokit, repository) {
-
 }
 
 fetch()
