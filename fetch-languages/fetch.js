@@ -10,7 +10,7 @@ async function fetch(){
 
         for (const project of projects) {
             console.log("Fetching languages for project ", project.name)
-            const response = await octokit.request(`GET ${project.languages_url.replace('https://api.github.com')}`)
+            const response = await octokit.request(`GET ${project.languages_url.replace('https://api.github.com', '')}`)
             idToLanguages[project.id] = response.data
         }
  
