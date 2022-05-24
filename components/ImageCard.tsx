@@ -16,7 +16,9 @@ interface TagToColor {
 export default function ImageCard({ title, description, imageUrl, tags, tagToColor }: ImageCardProps) {
   return (
     <Card>
-      <NextImage src={imageUrl} width={108} height={108} alt={title} />
+      {imageUrl ? (
+        <NextImage src={imageUrl} width={108} height={108} alt={title} />
+      ) : null}
       <Title>{title}</Title>
       <Description>{description}</Description>
 

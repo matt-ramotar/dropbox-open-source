@@ -3,7 +3,7 @@ import { EnvVars } from 'env';
 import Head from 'next/head';
 import React from 'react';
 import styled from 'styled-components';
-import Features from 'views/HomePage/Featured';
+import Featured from 'views/HomePage/Featured';
 import Partners from 'views/HomePage/GloballyTrusted';
 import Hero from 'views/HomePage/Hero';
 import Values from 'views/HomePage/Values';
@@ -30,7 +30,7 @@ export default function Homepage() {
         </DarkestBackgroundContainer>
 
         <DarkerBackgroundContainer>
-          <Features />
+          <Featured />
           <TwitterTimeline />
         </DarkerBackgroundContainer>
       </HomepageWrapper>
