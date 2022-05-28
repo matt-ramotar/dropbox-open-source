@@ -77,7 +77,7 @@ export default function ProjectCard({ tagToColor, repository: { id, name, descri
       }}>
         {contributors && contributors.length > 0 ? (
           contributors.map(contributor => (
-            <a href={contributor.html_url}>
+            <a href={contributor.html_url} key={contributor.login}>
               <img src={contributor.avatar_url} width={40} height={40} style={{ borderRadius: "50%", margin: '0.25rem' }} />
             </a>
           )
