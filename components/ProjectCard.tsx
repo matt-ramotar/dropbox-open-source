@@ -1,3 +1,5 @@
+import { faCodeFork, faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import { Repository } from 'types';
 import idToContributors from '../idToContributors';
@@ -34,14 +36,34 @@ interface IdToContributors {
   [id: string]: Contributor[]
 }
 
-export default function ProjectCard({ tagToColor, repository: { id, name, description, topics, languages_url, stargazers_count, forks_count, watchers_count } }: ProjectCardProps) {
+export default function ProjectCard({ tagToColor, repository: { id, name, description, topics, html_url, languages_url, stargazers_count, forks_count, watchers_count } }: ProjectCardProps) {
   const idString = id.toString()
   const languages: Languages = (idToLanguages as IdToLanguages)[idString]
   const contributors: Contributor[] = (idToContributors as IdToContributors)[idString]
   return (
     <Card>
-      <Title>{name}</Title>
+      <TitleWithLink href={html_url} target="_blank" rel="noreferrer">
+        <Title>{name}</Title>
+      </TitleWithLink>
       <Description>{description}</Description>
+
+      <div style={{ display: 'flex', flexDirection: 'row' }}>
+
+        <TitleWithLink href={`${html_url}/stargazers`} target="_blank" rel="noreferrer">
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginRight: "1rem" }}>
+            <h5 style={{ marginRight: "0.5rem" }}>{stargazers_count}</h5>
+            <FontAwesomeIcon icon={faStar} />
+          </div>
+        </TitleWithLink>
+
+        <TitleWithLink href={`${html_url}/network/members`} target="_blank" rel="noreferrer">
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: "1rem" }}>
+            <h5 style={{ marginRight: "0.5rem" }}>{forks_count}</h5>
+            <FontAwesomeIcon icon={faCodeFork} />
+          </div>
+        </TitleWithLink>
+
+      </div>
 
       {topics ? (
         <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -60,10 +82,6 @@ export default function ProjectCard({ tagToColor, repository: { id, name, descri
           ))}
         </div>
       ) : <span></span>}
-
-
-
-
 
       <div style={{
         display: 'flex',
@@ -137,4 +155,9 @@ const LanguageTag = styled.div`
   margin: 4px;
   font-weight: bold;
   font-size: 1.25rem;
+`
+
+const TitleWithLink = styled.a`
+    color: rgb(var(--primaryText));
+    text-decoration: none;
 `
