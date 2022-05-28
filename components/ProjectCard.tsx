@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Repository } from 'types';
+import idToContributors from '../idToContributors';
 import idToLanguages from '../idToLanguages';
 
 interface TagToColor {
@@ -19,13 +20,26 @@ interface Languages {
   [language: string]: number
 }
 
+interface Contributor {
+  login: string,
+  avatar_url: string,
+  html_url: string
+}
+
 interface IdToLanguages {
   [id: string]: Languages
+}
+
+interface IdToContributors {
+  [id: string]: Contributor[]
 }
 
 export default function ProjectCard({ tagToColor, repository: { id, name, description, topics, languages_url, stargazers_count, forks_count, watchers_count } }: ProjectCardProps) {
   const idString = id.toString()
   const languages: Languages = (idToLanguages as IdToLanguages)[idString]
+  const contributors: Contributor[] = (idToContributors as IdToContributors)[idString]
+
+  console.log(contributors)
 
   return (
     <Card>
@@ -49,6 +63,27 @@ export default function ProjectCard({ tagToColor, repository: { id, name, descri
           ))}
         </div>
       ) : <span></span>}
+
+
+
+
+
+      <div style={{
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
+      }}>
+        {contributors && contributors.length > 0 ? (
+          contributors.map(contributor => (
+            <a href={contributor.html_url}>
+              <img src={contributor.avatar_url} width={40} height={40} style={{ borderRadius: "50%", margin: '0.25rem' }} />
+            </a>
+          )
+          )
+        ) : null}
+      </div>
     </Card>
   );
 }

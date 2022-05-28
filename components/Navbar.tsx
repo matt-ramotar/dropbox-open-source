@@ -98,12 +98,9 @@ export default function Navbar({ items }: NavbarProps) {
           <ColorSwitcher />
         </ColorSwitcherContainer>
         <HamburgerMenuWrapper>
-
           <a onClick={toggle} aria-label="Toggle menu">
             <FontAwesomeIcon icon={faBars} size="3x" />
           </a>
-
-
         </HamburgerMenuWrapper>
       </Content>
     </NavbarContainer>
