@@ -155,6 +155,11 @@ const Title = styled.h1`
   font-weight: bold;
   margin-left: 8px;
   font-size: 3rem;
+
+
+  ${media('<phone')} {
+    display: none;
+  }
 `
 
 const NavItemWrapper = styled.li<Partial<SingleNavItem>>`
@@ -215,6 +220,10 @@ const ColorSwitcherContainer = styled.div`
 
 const SocialLinks = styled.div`  
   ${media('>=desktop')} {
+    display: none;
+  }
+
+  ${media('<phone')} {
     display: none;
   }
 
