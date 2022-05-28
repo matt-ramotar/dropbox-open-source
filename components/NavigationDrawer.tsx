@@ -10,6 +10,7 @@ import OriginalDrawer from './Drawer'
 type NavigationDrawerProps = PropsWithChildren<{ items: NavItems }>
 
 export default function NavigationDrawer({ children, items }: NavigationDrawerProps) {
+  console.log('hitting')
   return (
     <OriginalDrawer.Drawer>
       <Wrapper>
