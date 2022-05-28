@@ -38,9 +38,6 @@ export default function ProjectCard({ tagToColor, repository: { id, name, descri
   const idString = id.toString()
   const languages: Languages = (idToLanguages as IdToLanguages)[idString]
   const contributors: Contributor[] = (idToContributors as IdToContributors)[idString]
-
-  console.log(contributors)
-
   return (
     <Card>
       <Title>{name}</Title>

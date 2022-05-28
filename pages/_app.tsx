@@ -9,7 +9,7 @@ import { AppProps } from 'next/dist/shared/lib/router/router';
 import Head from 'next/head';
 import Script from 'next/script';
 import { ColorModeScript } from 'nextjs-color-mode';
-import React, { createContext, PropsWithChildren, useEffect, useMemo, useState } from 'react';
+import React, { createContext, PropsWithChildren, useMemo, useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/bundle';
@@ -34,10 +34,6 @@ const navItems: NavItems = [
 function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = useState('');
   const context = useMemo(() => ({ theme, setTheme }), [theme]);
-
-  useEffect(() => {
-    console.log(theme)
-  }, [theme])
 
   return (
     <>

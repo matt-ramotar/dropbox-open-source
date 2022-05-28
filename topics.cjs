@@ -12,7 +12,6 @@ async function topics(){
     }
 
     const sorted = Object.entries(topicToCount).sort((a, b) => b[1] - a[1])
-    console.log(sorted)
 }
 
 topics()
