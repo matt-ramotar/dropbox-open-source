@@ -157,7 +157,7 @@ const Title = styled.h1`
   font-size: 3rem;
 
 
-  ${media('<phone')} {
+  ${media('<tablet')} {
     display: none;
   }
 `
@@ -223,7 +223,7 @@ const SocialLinks = styled.div`
     display: none;
   }
 
-  ${media('<phone')} {
+  ${media('<tablet')} {
     display: none;
   }
 
