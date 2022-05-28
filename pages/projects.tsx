@@ -3,7 +3,7 @@ import { Heading } from 'components/Heading';
 import ProjectCard from 'components/ProjectCard';
 import { EnvVars } from 'env';
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Repository } from 'types.js';
 import { media } from 'utils/media';
@@ -21,9 +21,13 @@ const COLORS = [
   "#e4002b"
 ]
 
+interface TagToColor {
+  [tag: string]: string
+}
+
 
 function buildTagToColor() {
-  const tagToColor: { [tag: string]: string } = {}
+  const tagToColor: TagToColor = {}
 
   for (const project of projects) {
     for (const tag of project.topics) {
@@ -39,7 +43,18 @@ function buildTagToColor() {
 }
 
 export default function Projects() {
-  const tagToColor = buildTagToColor()
+  const [tagToColor, setTagToColor] = useState<TagToColor>()
+
+
+  useEffect(() => {
+    setTagToColor(buildTagToColor())
+  }, [])
+
+  const [searchInput, setSearchInput] = useState<string>("")
+
+  if (!tagToColor) {
+    return null
+  }
 
   return (
     <>
@@ -54,8 +69,13 @@ export default function Projects() {
 
         <DarkerBackgroundContainer>
           <Heading text="Projects" />
+
+          <div>
+            <SearchInput placeholder='Search...' onChange={e => setSearchInput(e.target.value)} />
+
+          </div>
           <CustomAutofitGrid>
-            {projects.map((project: Repository) => {
+            {projects.filter(project => isMatch(searchInput, project)).map((project: Repository) => {
               return project.visibility !== 'public' ? null : (
                 <ProjectCard key={project.name} tagToColor={tagToColor} repository={project} />
               )
@@ -66,6 +86,15 @@ export default function Projects() {
       </ProjectsWrapper>
     </>
   );
+}
+
+
+const isMatch = (input: string, project: Repository) => {
+  return (
+    project.name.toLowerCase().includes(input.toLowerCase()) ||
+    project.description?.toLowerCase().includes(input.toLowerCase()) ||
+    project.topics.join(', ').toLowerCase().includes(input.toLowerCase())
+  )
 }
 
 
@@ -80,7 +109,7 @@ const DarkerBackgroundContainer = styled.div`
   padding: 12.5rem 12.5rem;
 
   & > *:not(:first-child) {
-    margin-top: 15rem;
+    margin-top: 5rem;
   }
 
   ${media('<tablet')} {
@@ -133,3 +162,22 @@ const Button = styled.a`
     transform: scale(1.025);
   }
 `;
+
+const SearchInput = styled.input`
+  width: 600px;
+  border: none;
+  outline: none;
+  padding: 1rem;
+  border-radius: 1.25rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+
+  ${media('<=tablet')} {
+    width: 100%;
+  }
+
+ ::placeholder {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+`
