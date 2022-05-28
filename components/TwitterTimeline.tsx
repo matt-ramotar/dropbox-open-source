@@ -29,7 +29,7 @@ export default function TwitterTimeline() {
 function TwitterTimelineDark(props: { display: boolean }) {
     return (
         <div style={{ display: props.display ? 'flex' : 'none' }}>
-            <a className="twitter-timeline" data-width="500" data-theme='dark' href="https://twitter.com/DropboxOSS?ref_src=twsrc%5Etfw">Tweets by DropboxOSS</a>
+            <a className="twitter-timeline" data-width="500" data-height="500" data-theme='dark' href="https://twitter.com/DropboxOSS?ref_src=twsrc%5Etfw">Tweets by DropboxOSS</a>
             <Script src="https://platform.twitter.com/widgets.js"></Script>
         </div>
     )

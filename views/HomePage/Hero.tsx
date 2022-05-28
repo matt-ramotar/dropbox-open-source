@@ -1,4 +1,5 @@
 import Container from 'components/Container';
+import { Heading } from 'components/Heading';
 import OverTitle from 'components/OverTitle';
 import styled from 'styled-components';
 import { media } from 'utils/media';
@@ -8,7 +9,7 @@ export default function Hero() {
     <HeroWrapper>
       <Contents>
         <CustomOverTitle>Our mission is to design a more enlightened way of working</CustomOverTitle>
-        <Heading text="Dropbox Loves Open Source 💙" />
+        <Heading text="Dropbox Loves Open Source 💙" backgroundImage='spectrum.svg' />
         <Description>
           We participate in the open source community by using open source software internally and open sourcing our own projects
         </Description>
@@ -48,28 +49,4 @@ const Description = styled.p`
 
 const CustomOverTitle = styled(OverTitle)`
   margin-bottom: 2rem;
-`;
-
-interface HeadingProps {
-  text: string
-}
-
-const Heading = (props: HeadingProps) => <H1><span style={{
-  backgroundImage: 'url(spectrum.svg)',
-  backgroundRepeat: 'repeat-x',
-  backgroundSize: '40vw 0.15em',
-  backgroundPosition: 'left bottom 5px'
-}}>Dropbox Loves Open Source 💙</span></H1>
-
-const H1 = styled.h1`
-  font-size: 7.2rem;
-  font-weight: bold;
-  line-height: 1.1;
-  margin-bottom: 4rem;
-  letter-spacing: -0.03em;
-
-  ${media('<=tablet')} {
-    font-size: 4.6rem;
-    margin-bottom: 2rem;
-  }
 `;

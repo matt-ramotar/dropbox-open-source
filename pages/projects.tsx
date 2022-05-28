@@ -1,4 +1,5 @@
 import AutofitGrid from 'components/AutofitGrid';
+import { Heading } from 'components/Heading';
 import ProjectCard from 'components/ProjectCard';
 import { EnvVars } from 'env';
 import Head from 'next/head';
@@ -50,7 +51,9 @@ export default function Projects() {
         />
       </Head>
       <ProjectsWrapper>
+
         <DarkerBackgroundContainer>
+          <Heading text="Projects" />
           <CustomAutofitGrid>
             {projects.map((project: Repository) => {
               return project.visibility !== 'public' ? null : (
@@ -87,7 +90,7 @@ const DarkerBackgroundContainer = styled.div`
 
 const CustomAutofitGrid = styled(AutofitGrid)`
   --autofit-grid-item-size: 40rem;
-  margin-top: 4rem;
+  margin-top: 2rem;
 
   ${media('=tablet')} {
     --autofit-grid-item-size: 30rem;
