@@ -17,7 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@n8tb1t/use-scroll-position": "^2.0.3",
-    "@octokit/action": "^4.0.1",
+    "@octokit/action": "^4.0.4",
     "@svgr/webpack": "^5.5.0",
     "@types/react": "^17.0.20",
     "axios": "^0.27.2",
